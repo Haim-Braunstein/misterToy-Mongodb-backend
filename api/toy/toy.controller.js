@@ -3,24 +3,24 @@ import { logger } from '../../services/logger.service.js'
 
 export async function getToys(req, res) {
     try {
-        const filterBy = {
-            txt: req.query.txt || '',
-            inStock: req.query.inStock || 'all',
-            maxPrice: req.query.maxPrice || 0,
-        }
+        let { filterBy, sortBy } = req.query.params
 
-        const sortBy = req.query.sortBy
-            ? {
-                [req.query.sortBy]: 1
-            }
-            : {}
+        filterBy = {
+            txt: filterBy.txt || '',
+            inStock: filterBy.inStock || 'all',
+            maxPrice: filterBy.maxPrice || Infinity,
+        };
+
+        sortBy = sortBy && sortBy.order ? { [sortBy.field]: parseInt(sortBy.order) } : {};
 
         logger.debug('Getting Toys', filterBy, sortBy)
         const toys = await toyService.query(filterBy, sortBy)
-        res.json(toys)
+        res.json(toys);
+        console.log("🚀 ~ getToys ~ toys:", toys)
+
     } catch (err) {
-        logger.error('Failed to get toys', err)
-        res.status(500).send({ err: 'Failed to get toys' })
+        logger.error('Failed to get toys', err);
+        res.status(500).send({ err: 'Failed to get toys' });
     }
 }
 

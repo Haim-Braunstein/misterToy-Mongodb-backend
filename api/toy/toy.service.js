@@ -5,14 +5,14 @@ import { dbService } from '../../services/db.service.js'
 import { logger } from '../../services/logger.service.js'
 import { utilService } from '../../services/util.service.js'
 
-async function query(filterBy = { txt: '', inStock: 'all', maxPrice: 0 }, sortBy) {
+async function query(filterBy, sortBy) {
     try {
 
         const criteria = {
             name: { $regex: filterBy.txt, $options: 'i' },
             inStock: filterBy.inStock !== 'all' ?
                 (filterBy.inStock === 'in-stock') : { $ne: 'out-of-stock' },
-            price: { $lte: filterBy.maxPrice !== 0 ? +filterBy.maxPrice : Number.MAX_VALUE }
+            price: { $lte: +filterBy.maxPrice !== 0 ? +filterBy.maxPrice : +Number.MAX_VALUE }
 
         }
 
