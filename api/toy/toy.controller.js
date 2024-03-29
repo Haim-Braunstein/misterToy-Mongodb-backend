@@ -73,7 +73,6 @@ export async function removeToy(req, res) {
 }
 
 export async function addToyMsg(req, res) {
-    console.log("🚀 ~ file: toy.controller.js:76 ~ addToyMsg ~ req:", req.body)
     const {data}= req.body
     const { loggedinUser } = req
     try {

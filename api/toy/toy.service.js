@@ -60,8 +60,9 @@ async function add(toy) {
 async function update(toy) {
     try {
         const toyToSave = {
-            title: toy.title,
-            importance: toy.importance
+            name: toy.name,
+            price: toy.price,
+            inStock: toy.inStock ? true : false
         }
         const collection = await dbService.getCollection('toy')
         await collection.updateOne({ _id: ObjectId(toy._id) }, { $set: toyToSave })
@@ -73,7 +74,6 @@ async function update(toy) {
 }
 
 async function addToyMsg(toyId, msg) {
-    console.log("🚀 ~ file: toy.service.js:76 ~ addToyMsg ~ toyId:", msg)
     try {
         msg.id = utilService.makeId()
         const collection = await dbService.getCollection('toy')
