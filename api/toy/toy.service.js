@@ -6,7 +6,6 @@ import { logger } from '../../services/logger.service.js'
 import { utilService } from '../../services/util.service.js'
 
 async function query(filterBy, sortBy) {
-    console.log("🚀 ~ query ~ sortBy:", sortBy)
     try {
 
         const criteria = {

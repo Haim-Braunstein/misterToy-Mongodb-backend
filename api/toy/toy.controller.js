@@ -4,7 +4,6 @@ import { logger } from '../../services/logger.service.js'
 export async function getToys(req, res) {
     try {
         let { filterBy, sortBy } = req.query.params
-        console.log("🚀 ~ getToys ~ sortBy:", sortBy)
 
         filterBy = {
             txt: filterBy.txt || '',

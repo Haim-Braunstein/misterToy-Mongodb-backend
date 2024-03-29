@@ -38,7 +38,10 @@ async function signup(username, password, fullname) {
 
 function getLoginToken(user) {
     const userInfo = {_id : user._id, fullname: user.fullname, isAdmin: user.isAdmin}
-    return cryptr.encrypt(JSON.stringify(userInfo))    
+    console.log("🚀 ~ file: auth.service.js:43 ~ getLoginToken ~ user:", user)
+
+    return cryptr.encrypt(JSON.stringify(userInfo))   
+ 
 }
 
 function validateToken(loginToken) {
