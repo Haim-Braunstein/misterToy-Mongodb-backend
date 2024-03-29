@@ -73,6 +73,7 @@ async function update(toy) {
 }
 
 async function addToyMsg(toyId, msg) {
+    console.log("🚀 ~ file: toy.service.js:76 ~ addToyMsg ~ toyId:", msg)
     try {
         msg.id = utilService.makeId()
         const collection = await dbService.getCollection('toy')

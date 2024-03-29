@@ -73,11 +73,13 @@ export async function removeToy(req, res) {
 }
 
 export async function addToyMsg(req, res) {
+    console.log("🚀 ~ file: toy.controller.js:76 ~ addToyMsg ~ req:", req.body)
+    const {data}= req.body
     const { loggedinUser } = req
     try {
         const toyId = req.params.id
         const msg = {
-            txt: req.body.txt,
+            txt: data || '',
             by: loggedinUser,
         }
         const savedMsg = await toyService.addToyMsg(toyId, msg)
